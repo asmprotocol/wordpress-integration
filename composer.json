@@ -1,0 +1,20 @@
+{
+    "name": "asmp/wordpress-integration",
+    "description": "WordPress integration plugin for ASMP",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^6"
+    },
+    "autoload": {
+        "psr-4": {
+            "ASMP\\WordPressIntegration\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ASMP\\WordPressIntegration\\Tests\\": "tests/php/"
+        }
+    }
+}
