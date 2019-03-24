@@ -4,7 +4,7 @@
     "type": "wordpress-plugin",
     "license": "MIT",
     "require": {
-        "application-server-management-protocol/php-client": "dev-master"
+        "application-server-management-protocol/php-client": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^6"
@@ -18,6 +18,5 @@
         "psr-4": {
             "ASMP\\WordPressIntegration\\Tests\\": "tests/php/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
