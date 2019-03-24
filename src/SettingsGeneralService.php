@@ -37,15 +37,17 @@ final class SettingsGeneralService implements Service, Registerable {
 	 * @return void
 	 */
 	public function register(): void {
-		if ( ! isset( $_SERVER[ ASMP::VERSION ] ) ) {
-		// TODO	return;
+		if ( ! $this->has_asmp() ) {
+			return;
 		}
 
-		// TODO
-		$_SERVER[ ASMP::ENDPOINT ] = [ '5.6', '7.0', '7.2' ];
-
-		add_action( 'admin_init', function() {
-			\add_settings_field( 'asmp', esc_html__( 'PHP Versions', 'asmp' ), [ $this, 'render' ], 'general' );
+		\add_action( 'admin_init', function () {
+			\add_settings_field(
+				'asmp',
+				esc_html__( 'PHP Versions', 'asmp' ),
+				[ $this, 'render' ],
+				'general'
+			);
 		} );
 	}
 
@@ -56,7 +58,37 @@ final class SettingsGeneralService implements Service, Registerable {
 	 */
 	public function render(): void {
 		echo $this->view_factory->create( 'views/setting' )
-		                        ->render();
+		                        ->render( [ 'options' => $this->retrieve_php_version_options() ] );
+	}
+
+	/**
+	 * Check whether ASMP is available.
+	 *
+	 * @return bool Whether ASMP is available.
+	 */
+	private function has_asmp(): bool {
+		return true;
+		// return isset( $_SERVER[ ASMP::VERSION ] );
+	}
+
+	/**
+	 * Get the ASMP endpoint to communimcate with.
+	 *
+	 * @return string ASMP endpoint.
+	 */
+	private function get_endpoint(): string {
+		return '';
+		// return $_SERVER[ ASMP::ENDPOINT ];
+	}
+
+	/**
+	 * Retrieve the available options for the PHP version.
+	 *
+	 * @return array
+	 */
+	private function retrieve_php_version_options() {
+		// TODO
+		return [ '5.6', '7.0', '7.2' ];
 	}
 }
 
