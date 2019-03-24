@@ -25,7 +25,7 @@ use ASMP\WordPressIntegration\Infrastructure\ViewFactory;
 final class TemplatedView extends SimpleView {
 
 	/** @var array<string> */
-	private $locations = [];
+	private $locations;
 
 	/**
 	 * Instantiate a TemplatedView object.
@@ -39,26 +39,8 @@ final class TemplatedView extends SimpleView {
 		ViewFactory $view_factory,
 		array $locations = []
 	) {
-		$this->set_locations( $locations );
+		array_walk( $locations, [ $this, 'add_location' ] );
 		parent::__construct( $path, $view_factory );
-	}
-
-	/**
-	 * Set the locations for the templated view.
-	 *
-	 * @param array $locations Array of locations.
-	 * @return self Modified templated view.
-	 */
-	public function set_locations( array $locations ): self {
-		if ( empty( $locations ) ) {
-			$locations = $this->get_default_locations();
-		}
-
-		$this->locations = array_map( function ( $location ) {
-			return $this->ensure_trailing_slash( $location );
-		}, $locations );
-
-		return $this;
 	}
 
 	/**
@@ -105,25 +87,8 @@ final class TemplatedView extends SimpleView {
 	 * @return array Array of possible locations.
 	 */
 	private function get_locations( string $path ): array {
-		if ( empty( $this->locations ) ) {
-			$this->set_default_locations();
-		}
-
 		return array_map( function ( $location ) use ( $path ) {
 			return "{$location}{$path}";
 		}, $this->locations );
-	}
-
-	/**
-	 * Get the default locations for the templated view.
-	 *
-	 * @return array Array of default locations.
-	 */
-	private function get_default_locations(): array {
-		return [
-			STYLESHEETPATH,
-			TEMPLATEPATH,
-			\dirname( __DIR__, 2 ),
-		];
 	}
 }
