@@ -178,7 +178,6 @@ final class Plugin implements Registerable, Activateable, Deactivateable {
 		return \apply_filters( self::SERVICES_FILTER, [
 			// Add services as FQCNs here.
 			ViewFactory::class,
-			SampleService::class,
 			SettingsGeneralService::class,
 		] );
 	}
