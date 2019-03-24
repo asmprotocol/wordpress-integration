@@ -50,6 +50,10 @@ final class TemplatedView extends SimpleView {
 	 * @return self Modified templated view.
 	 */
 	public function set_locations( array $locations ): self {
+		if ( empty( $locations ) ) {
+			$locations = $this->get_default_locations();
+		}
+
 		$this->locations = array_map( function ( $location ) {
 			return $this->ensure_trailing_slash( $location );
 		}, $locations );
@@ -111,15 +115,15 @@ final class TemplatedView extends SimpleView {
 	}
 
 	/**
-	 * Set the default locations for the templated view.
+	 * Get the default locations for the templated view.
 	 *
-	 * @return self Modified templated view.
+	 * @return array Array of default locations.
 	 */
-	private function set_default_locations(): self {
-		return $this->set_locations( [
+	private function get_default_locations(): array {
+		return [
 			STYLESHEETPATH,
 			TEMPLATEPATH,
 			\dirname( __DIR__, 2 ),
-		] );
+		];
 	}
 }
