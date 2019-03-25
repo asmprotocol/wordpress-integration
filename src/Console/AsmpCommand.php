@@ -101,7 +101,7 @@ final class AsmpCommand {
 	public function endpoint( array $args = [], array $assoc_args = [] ): void {
 		$this->ensure_asmp_is_available();
 
-		WP_CLI::log( \getenv( ASMP::VERSION ) );
+		WP_CLI::log( \getenv( ASMP::ENDPOINT ) );
 	}
 
 	/**
