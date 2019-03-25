@@ -179,6 +179,7 @@ final class Plugin implements Registerable, Activateable, Deactivateable {
 			// Add services as FQCNs here.
 			ViewFactory::class,
 			SettingsGeneralService::class,
+			ConsoleIntegration::class,
 		] );
 	}
 }
