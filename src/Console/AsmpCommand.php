@@ -21,6 +21,8 @@ final class AsmpCommand {
 	 * @param array $assoc_args Optional. Array of associative arguments.
 	 */
 	public function check( array $args, array $assoc_args ): void {
+		$this->ensure_asmp_is_available();
+
 		WP_CLI::error( 'Not implemented yet' );
 	}
 
@@ -31,6 +33,8 @@ final class AsmpCommand {
 	 * @param array $assoc_args Optional. Array of associative arguments.
 	 */
 	public function change( array $args = [], array $assoc_args = [] ): void {
+		$this->ensure_asmp_is_available();
+
 		WP_CLI::error( 'Not implemented yet' );
 	}
 
@@ -41,6 +45,8 @@ final class AsmpCommand {
 	 * @param array $assoc_args Optional. Array of associative arguments.
 	 */
 	public function rollback( array $args = [], array $assoc_args = [] ): void {
+		$this->ensure_asmp_is_available();
+
 		WP_CLI::error( 'Not implemented yet' );
 	}
 
@@ -81,10 +87,40 @@ final class AsmpCommand {
 	 * @param array $assoc_args Optional. Array of associative arguments.
 	 */
 	public function version( array $args = [], array $assoc_args = [] ): void {
-		if ( ! $this->is_available() ) {
-			WP_CLI::error( 'ASMP is not available.' );
-		}
+		$this->ensure_asmp_is_available();
 
 		WP_CLI::log( \getenv( ASMP::VERSION ) );
+	}
+
+	/**
+	 * Get the provided endpoint of ASMP.
+	 *
+	 * @param array $args       Optional. Array of positional arguments.
+	 * @param array $assoc_args Optional. Array of associative arguments.
+	 */
+	public function endpoint( array $args = [], array $assoc_args = [] ): void {
+		$this->ensure_asmp_is_available();
+
+		WP_CLI::log( \getenv( ASMP::VERSION ) );
+	}
+
+	/**
+	 * Check whether ASMP is supported.
+	 *
+	 * @return bool Whether ASMP is supported.
+	 */
+	private function is_supported(): bool {
+		return false !== \getenv( ASMP::VERSION );
+	}
+
+	/**
+	 * Ensure that ASMP is available.
+	 *
+	 * Throws a WP_CLI error and exits the process if not.
+	 */
+	private function ensure_asmp_is_available(): void {
+		if ( ! $this->is_supported() ) {
+			WP_CLI::error( 'ASMP is not available.' );
+		}
 	}
 }
