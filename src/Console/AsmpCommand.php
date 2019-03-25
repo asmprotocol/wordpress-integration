@@ -30,7 +30,12 @@ final class AsmpCommand {
 	 * Instantiate a AsmpCommand object.
 	 */
 	public function __construct() {
-		$this->config = Configuration::getDefaultConfiguration();
+		if ( ! $this->is_supported() ) {
+			return;
+		}
+
+		$this->config = Configuration::getDefaultConfiguration()
+		                             ->setHost( $this->get_endpoint() );
 	}
 
 	/**
@@ -120,11 +125,7 @@ final class AsmpCommand {
 	 * @param array $assoc_args Optional. Array of associative arguments.
 	 */
 	public function is_available( array $args = [], array $assoc_args = [] ): void {
-		if ( false === \getenv( ASMP::VERSION ) ) {
-			exit( 1 );
-		}
-
-		exit( 0 );
+		exit( $this->is_supported() ? 0 : 1 );
 	}
 
 	/**
@@ -136,7 +137,7 @@ final class AsmpCommand {
 	public function version( array $args = [], array $assoc_args = [] ): void {
 		$this->ensure_asmp_is_available();
 
-		WP_CLI::log( \getenv( ASMP::VERSION ) );
+		WP_CLI::log( $this->get_version() );
 	}
 
 	/**
@@ -148,7 +149,7 @@ final class AsmpCommand {
 	public function endpoint( array $args = [], array $assoc_args = [] ): void {
 		$this->ensure_asmp_is_available();
 
-		WP_CLI::log( \getenv( ASMP::ENDPOINT ) );
+		WP_CLI::log( $this->get_endpoint() );
 	}
 
 	/**
@@ -158,6 +159,24 @@ final class AsmpCommand {
 	 */
 	private function is_supported(): bool {
 		return false !== \getenv( ASMP::VERSION );
+	}
+
+	/**
+	 * Get the version of ASMP.
+	 *
+	 * @return string ASMP version.
+	 */
+	private function get_version(): string {
+		return \getenv( ASMP::VERSION );
+	}
+
+	/**
+	 * Get the endpoint for ASMP.
+	 *
+	 * @return string ASMP endpoint.
+	 */
+	private function get_endpoint(): string {
+		return \getenv( ASMP::ENDPOINT );
 	}
 
 	/**
