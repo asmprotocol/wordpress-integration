@@ -18,6 +18,7 @@ use ASMP\Client\Model\CheckRequest;
 use ASMP\Client\Model\RollbackRequest;
 use ASMP\WordPressIntegration\ASMP;
 use GuzzleHttp\Client;
+use Throwable;
 use WP_CLI;
 
 final class AsmpCommand {
@@ -43,7 +44,13 @@ final class AsmpCommand {
 
 		$apiInstance = new CheckApi( new Client(), $this->config );
 		$body        = new CheckRequest();
-		var_dump( $body );
+
+		try {
+			$response = $apiInstance->check( $body );
+			print_r( $response );
+		} catch ( Throwable $exception ) {
+			WP_CLI::error( "Exception when calling CheckApi->change: {$exception->getMessage()}" );
+		}
 	}
 
 	/**
@@ -57,7 +64,13 @@ final class AsmpCommand {
 
 		$apiInstance = new ChangeApi( new Client(), $this->config );
 		$body        = new ChangeRequest();
-		var_dump( $body );
+
+		try {
+			$response = $apiInstance->change( $body );
+			print_r( $response );
+		} catch ( Throwable $exception ) {
+			WP_CLI::error( "Exception when calling ChangeApi->change: {$exception->getMessage()}" );
+		}
 	}
 
 	/**
@@ -71,7 +84,13 @@ final class AsmpCommand {
 
 		$apiInstance = new RollbackApi( new Client(), $this->config );
 		$body        = new RollbackRequest();
-		var_dump( $body );
+
+		try {
+			$response = $apiInstance->rollback( $body );
+			print_r( $response );
+		} catch ( Throwable $exception ) {
+			WP_CLI::error( "Exception when calling RollbackApi->change: {$exception->getMessage()}" );
+		}
 	}
 
 	/**
