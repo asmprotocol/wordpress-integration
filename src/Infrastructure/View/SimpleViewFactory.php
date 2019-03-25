@@ -5,7 +5,7 @@
  *
  * @package   ASMP\WordPressIntegration
  * @license   MIT
- * @link      https://www.alainschlesser.com/asmp
+ * @link      https://www.asmprotocol.org/
  */
 
 namespace ASMP\WordPressIntegration\Infrastructure\View;

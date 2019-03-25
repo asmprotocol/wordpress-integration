@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "386ebc1e93bd9b1822b98a2e1a6a8d27",
+    "content-hash": "4355f35c1619aaf741d703c78b40b041",
     "packages": [
         {
-            "name": "application-server-management-protocol/php-client",
-            "version": "v0.1.0",
+            "name": "asmprotocol/php-client",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/application-server-management-protocol/php-client.git",
-                "reference": "f06fb25f255a49a3506305f99123718dc8ac1476"
+                "url": "https://github.com/asmprotocol/php-client.git",
+                "reference": "96dd07e80bc8b122b67428ca84fd21be9c38b7b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/application-server-management-protocol/php-client/zipball/f06fb25f255a49a3506305f99123718dc8ac1476",
-                "reference": "f06fb25f255a49a3506305f99123718dc8ac1476",
+                "url": "https://api.github.com/repos/asmprotocol/php-client/zipball/96dd07e80bc8b122b67428ca84fd21be9c38b7b9",
+                "reference": "96dd07e80bc8b122b67428ca84fd21be9c38b7b9",
                 "shasum": ""
             },
             "require": {
@@ -43,8 +43,8 @@
                 "MIT"
             ],
             "description": "PHP client library for ASMP",
-            "homepage": "https://www.alainschlesser.com/asmp",
-            "time": "2019-03-24T15:54:05+00:00"
+            "homepage": "https://www.asmprotocol.org/",
+            "time": "2019-03-25T12:56:49+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

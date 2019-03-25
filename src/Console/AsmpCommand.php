@@ -4,15 +4,33 @@
  *
  * @package   ASMP\WordPressIntegration
  * @license   MIT
- * @link      https://www.alainschlesser.com/asmp
+ * @link      https://www.asmprotocol.org/
  */
 
 namespace ASMP\WordPressIntegration\Console;
 
+use ASMP\Client\Api\ChangeApi;
+use ASMP\Client\Api\CheckApi;
+use ASMP\Client\Api\RollbackApi;
+use ASMP\Client\Configuration;
+use ASMP\Client\Model\ChangeRequest;
+use ASMP\Client\Model\CheckRequest;
+use ASMP\Client\Model\RollbackRequest;
 use ASMP\WordPressIntegration\ASMP;
+use GuzzleHttp\Client;
 use WP_CLI;
 
 final class AsmpCommand {
+
+	/** @var Configuration */
+	private $config;
+
+	/**
+	 * Instantiate a AsmpCommand object.
+	 */
+	public function __construct() {
+		$this->config = Configuration::getDefaultConfiguration();
+	}
 
 	/**
 	 * Run a check against ASMP.
@@ -23,7 +41,9 @@ final class AsmpCommand {
 	public function check( array $args, array $assoc_args ): void {
 		$this->ensure_asmp_is_available();
 
-		WP_CLI::error( 'Not implemented yet' );
+		$apiInstance = new CheckApi( new Client(), $this->config );
+		$body        = new CheckRequest();
+		var_dump( $body );
 	}
 
 	/**
@@ -35,7 +55,9 @@ final class AsmpCommand {
 	public function change( array $args = [], array $assoc_args = [] ): void {
 		$this->ensure_asmp_is_available();
 
-		WP_CLI::error( 'Not implemented yet' );
+		$apiInstance = new ChangeApi( new Client(), $this->config );
+		$body        = new ChangeRequest();
+		var_dump( $body );
 	}
 
 	/**
@@ -47,7 +69,9 @@ final class AsmpCommand {
 	public function rollback( array $args = [], array $assoc_args = [] ): void {
 		$this->ensure_asmp_is_available();
 
-		WP_CLI::error( 'Not implemented yet' );
+		$apiInstance = new RollbackApi( new Client(), $this->config );
+		$body        = new RollbackRequest();
+		var_dump( $body );
 	}
 
 	/**
@@ -62,6 +86,10 @@ final class AsmpCommand {
 	 * @param array $assoc_args Optional. Array of associative arguments.
 	 */
 	public function status( array $args = [], array $assoc_args = [] ): void {
+		$this->ensure_asmp_is_available();
+
+		list( $id ) = $args;
+
 		WP_CLI::error( 'Not implemented yet' );
 	}
 
