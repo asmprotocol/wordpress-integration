@@ -11,6 +11,7 @@
 namespace ASMP\WordPressIntegration;
 
 interface ASMP {
-	public const VERSION = 'ASMP_DISCOVERY_VERSION';
+
+	public const VERSION  = 'ASMP_DISCOVERY_VERSION';
 	public const ENDPOINT = 'ASMP_DISCOVERY_ENDPOINT';
 }
